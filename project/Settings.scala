@@ -7,8 +7,8 @@ import xerial.sbt.Sonatype
 
 object Settings {
 
-  val scala_2_11 = "2.11.8"
-  val scala_2_12 = "2.12.1"
+  val scala_2_11 = "2.11.11"
+  val scala_2_12 = "2.12.2"
 
   val alsoOnTest = "compile->compile;test->test"
 
@@ -54,12 +54,16 @@ object Settings {
   )
 
   val play = common ++ Seq(
-    scalaVersion := scala_2_11
+    scalaVersion := scala_2_11,
+    crossScalaVersions := Seq(scala_2_11, scala_2_12),
+    releaseCrossBuild := true
   )
 
   // common settings for play and core modules
   val parent = common ++ Seq(
     scalaVersion := scala_2_11,
+    crossScalaVersions := Seq(scala_2_11, scala_2_12),
+    releaseCrossBuild := true,
     resolvers += Resolver.typesafeRepo("releases"),
     resolvers += Resolver.sonatypeRepo("releases"),
     resolvers += Resolver.sonatypeRepo("snapshots"),
